@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ public class CarController {
     @GetMapping("/")
         public String list(Model model) {
             model.addAttribute("cars", cars);
-            return "list";
+            return "index";
         }
 
     @GetMapping("/index/{index}")
@@ -53,5 +54,9 @@ public class CarController {
             return "edit";
         }
         return "redirect:/";
+    }
+
+    @PostMapping("/save"){
+
     }
 }
