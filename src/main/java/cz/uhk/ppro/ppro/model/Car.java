@@ -11,6 +11,7 @@ public class Car {
     }
 
     public Car(String spz, String color, float tankVolume, int numberOfSeats) {
+        this.id = id-1;
         this.spz = spz;
         this.color = color;
         this.tankVolume = tankVolume;
