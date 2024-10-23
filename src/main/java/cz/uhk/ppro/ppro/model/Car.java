@@ -1,10 +1,25 @@
 package cz.uhk.ppro.ppro.model;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 public class Car {
-    private int id;
+    private int id = -1;
+
+    @Size(min=7, max=7)
     private String spz;
+
+    @NotBlank
     private String color;
+
+    @Min(value=30)
+    @Max(value=100)
     private float tankVolume;
+
+    @Min(value=2)
+    @Max(value=8)
     private int numberOfSeats;
 
     public Car() {

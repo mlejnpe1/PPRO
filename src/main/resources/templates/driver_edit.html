@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${edit ? 'Edit Driver' : 'New Driver'}"></title>
+</head>
+<body>
+    <form th:action="@{'/drivers/save'}" method="post" th:object="${driver}">
+        Name: <input type="text" th:field="*{driver.name}"><br>
+        <span th:if="${#fields.hasErrors('driver.name')}" th:errors="*{driver.name}"></span><br>
+        Age: <input type="text" th:field="*{driver.age}"><br>
+        <span th:if="${#fields.hasErrors('driver.age')}" th:errors="*{driver.age}"></span><br>
+        Salary: <input type="number" th:field="*{driver.salary}"><br>
+        <span th:if="${#fields.hasErrors('driver.salary')}" th:errors="*{driver.salary}"></span><br>
+        <input type="submit" value="Save">
+    </form>
+</body>
+</html>

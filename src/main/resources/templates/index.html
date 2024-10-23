@@ -1,18 +1,15 @@
-<!doctype html>
-<html lang="cz">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>List of All Cars</title>
+    <title>PPRO Project</title>
 </head>
 <body>
-<a th:href="@{'/create'}"> New Car</a>
-    <ul>
-        <li th:each="car, iter: ${cars}">
-            <a th:href="@{'/detail' + ${iter.index}}">
-                <span th:text="${car.spz}"></span>
-                </a>
-        </li>
-    </ul>
+<center>
+  <h1>PPRO Project</h1>
+  <a th:href="@{'/cars/'}">List of Cars</a>
+  <br><br>
+  <a th:href="@{'/drivers/'}">List of Drivers</a>
+</center>
 </body>
 </html>

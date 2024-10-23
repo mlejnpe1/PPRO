@@ -7,9 +7,13 @@
 <body>
     <form th:action="@{'/save'}" method="post" th:object="${car}">
         SPZ: <input type="text" th:field="*{spz}"><br>
+        <span th:if="${#fields.hasErrors('spz')}" th:errors="*{spz}"></span><br>
         Color: <input type="text" th:field="*{color}"><br>
+        <span th:if="${#fields.hasErrors('color')}" th:errors="*{color}"></span><br>
         Tank Volume: <input type="number" th:field="*{tankVolume}"><br>
+        <span th:if="${#fields.hasErrors('tankVolume')}" th:errors="*{tankVolume}"></span><br>
         Number of Seats: <input type="number" th:field="*{numberOfSeats}"><br>
+        <span th:if="${#fields.hasErrors('numberOfSeats')}" th:errors="*{numberOfSeats}"></span><br>
         <input type="submit" value="Save">
     </form>
 </body>
