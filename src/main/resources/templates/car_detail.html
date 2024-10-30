@@ -5,8 +5,8 @@
     <title>Car details</title>
 </head>
 <body>
-<a th:href="@{'/edit/' + ${index}}">EDIT Car</a><br>
-<a th:href="@{'/delete/' + ${index}}">DELETE Car</a><br>
+<a th:href="@{'/cars/edit/' + ${car.id}}">EDIT Car</a><br>
+<a th:href="@{'/cars/delete/' + ${car.id}}">DELETE Car</a><br>
 <b>SPZ:</b><span th:text="${car.spz}"></span><br>
 <b>Color:</b><span th:text="${car.color}"></span><br>
 <b>Tank Volume:</b><span th:text="${car.tankVolume}"></span><br>

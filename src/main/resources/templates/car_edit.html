@@ -5,7 +5,7 @@
     <title th:text="${edit ? 'Edit Car' : 'New Car'}"></title>
 </head>
 <body>
-    <form th:action="@{'/save'}" method="post" th:object="${car}">
+    <form th:action="@{'/cars/save'}" method="post" th:object="${car}">
         SPZ: <input type="text" th:field="*{spz}"><br>
         <span th:if="${#fields.hasErrors('spz')}" th:errors="*{spz}"></span><br>
         Color: <input type="text" th:field="*{color}"><br>

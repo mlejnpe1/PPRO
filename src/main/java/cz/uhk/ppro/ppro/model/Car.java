@@ -1,12 +1,18 @@
 package cz.uhk.ppro.ppro.model;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import jdk.jfr.Enabled;
 
+@Entity
+@Table(name="cars")
 public class Car {
-    private int id = -1;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     @Size(min=7, max=7)
     private String spz;
@@ -26,18 +32,17 @@ public class Car {
     }
 
     public Car(String spz, String color, float tankVolume, int numberOfSeats) {
-        this.id = id-1;
         this.spz = spz;
         this.color = color;
         this.tankVolume = tankVolume;
         this.numberOfSeats = numberOfSeats;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

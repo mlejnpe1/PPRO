@@ -1,12 +1,11 @@
 package cz.uhk.ppro.ppro.service;
 
+import java.util.List;
 import cz.uhk.ppro.ppro.model.Driver;
 
-import java.util.ArrayList;
-
 public interface DriverService {
-    public ArrayList<Driver> getAllDrivers();
-    public Driver getDriverById(int id);
-    public void deleteDriverById(int id);
+    public List<Driver> getAllDrivers();
+    public Driver getDriverById(long id);
+    public void deleteDriverById(long id);
     void saveDriver(Driver driver);
 }

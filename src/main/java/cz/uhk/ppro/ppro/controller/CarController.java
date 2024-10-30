@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("Car")
+@RequestMapping("/cars")
 public class CarController {
 
     private CarService carService;
@@ -29,20 +29,21 @@ public class CarController {
             return "car_list";
         }
 
-    @GetMapping("/index/{index}")
-    public String detail(Model model, @PathVariable int index) {
-        if(index > -1 && index < carService.getAllCars().size()) {
-            Car car = carService.getCarById(index);
+    @GetMapping("/detail/{id}")
+    public String detail(Model model, @PathVariable long id) {
+        Car car = carService.getCarById(id);
+        if(car != null) {
             model.addAttribute("car", car);
             return "car_detail";
         }
-        return "redirect:/cars/";
+        //return "redirect:/cars/";
+        return "car_detail";
     }
 
-    @GetMapping("/delete/{index}")
-    public String delete(Model model, @PathVariable int index) {
-        if(index > -1 && index < carService.getAllCars().size()) {
-           carService.deleteCarById(index);
+    @GetMapping("/delete/{id}")
+    public String delete(Model model, @PathVariable long id) {
+        if(id > -1 && id < carService.getAllCars().size()) {
+           carService.deleteCarById(id);
         }
         return "redirect:/cars/";
     }
@@ -54,11 +55,10 @@ public class CarController {
         return "car_edit";
     }
 
-    @GetMapping("/edit/{index}")
-    public String edit(Model model, @PathVariable int index) {
-        Car car = carService.getCarById(index);
+    @GetMapping("/edit/{id}")
+    public String edit(Model model, @PathVariable long id) {
+        Car car = carService.getCarById(id);
         if(car != null) {
-            car.setId(index);
             model.addAttribute("car", car);
             model.addAttribute("edit", true);
             return "car_edit";

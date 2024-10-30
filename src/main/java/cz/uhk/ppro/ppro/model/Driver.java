@@ -1,11 +1,17 @@
 package cz.uhk.ppro.ppro.model;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
+@Entity
+@Table(name = "drivers")
 public class Driver {
-    private int id = -1;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     @NotBlank
     private String name;
@@ -17,7 +23,7 @@ public class Driver {
     @NotBlank
     private int salary;
 
-    public Driver(int id, String name, int age, int salary) {
+    public Driver(long id, String name, int age, int salary) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -27,11 +33,11 @@ public class Driver {
     public Driver() {
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

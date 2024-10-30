@@ -1,40 +1,46 @@
 package cz.uhk.ppro.ppro.service;
 
 import cz.uhk.ppro.ppro.model.Driver;
+import cz.uhk.ppro.ppro.repository.CarRepository;
+import cz.uhk.ppro.ppro.repository.DriverRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DriverServiceImpl implements DriverService{
 
-        ArrayList<Driver> drivers= new ArrayList<>();
+    private final CarRepository carRepository;
+    private DriverRepository driverRepository;
 
-        @Override
-        public ArrayList<Driver> getAllDrivers() {
-            return drivers;
+        @Autowired
+        public DriverServiceImpl(DriverRepository driverRepository, CarRepository carRepository) {
+            this.driverRepository = driverRepository;
+            this.carRepository = carRepository;
         }
 
         @Override
-        public Driver getDriverById(int id){
-            if(id>-1&&id<drivers.size()){
-                Driver driver = drivers.get(id);
-                return driver;
-            }
-            return null;
+        public List<Driver> getAllDrivers() {
+            return driverRepository.findAll();
         }
 
         @Override
-        public void deleteDriverById(int id){
-            if(id>-1&&id<drivers.size()){
-                drivers.remove(id);
+        public Driver getDriverById(long id){
+            return driverRepository.findById(id).orElse(null);
+        }
+
+        @Override
+        public void deleteDriverById(long id){
+            Optional<Driver> driver = driverRepository.findById(id);
+            if(driver.isPresent()){
+                driverRepository.delete(driver.get());
             }
         }
 
         @Override
         public void saveDriver(Driver driver){
-            if(driver.getId()>-1){
-                drivers.add(driver);
-            }
+            driverRepository.save(driver);
         }
 }

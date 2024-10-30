@@ -50,7 +50,7 @@ public class DriverController {
     public String create(Model model) {
         model.addAttribute("driver", new Driver());
         model.addAttribute("edit", false);
-        return "edit_edit";
+        return "driver_edit";
     }
 
     @GetMapping("/edit/{index}")
@@ -60,7 +60,7 @@ public class DriverController {
             driver.setId(index);
             model.addAttribute("driver", driver);
             model.addAttribute("edit", true);
-            return "edit_edit";
+            return "driver_edit";
         }
         return "redirect:/drivers/";
     }
