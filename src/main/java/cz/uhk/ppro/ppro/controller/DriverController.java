@@ -28,21 +28,19 @@ public class DriverController {
         return "driver_list";
     }
 
-    @GetMapping("/index/{index}")
-    public String detail(Model model, @PathVariable int index) {
-        if(index > -1 && index < driverService.getAllDrivers().size()) {
-            Driver driver = driverService.getDriverById(index);
+    @GetMapping("/detail/{id}")
+    public String detail(Model model, @PathVariable long id) {
+        Driver driver = driverService.getDriverById(id);
+        if (driver != null) {
             model.addAttribute("driver", driver);
-            return "driver_list";
+            return "driver_detail";
         }
         return "redirect:/drivers/";
     }
 
-    @GetMapping("/delete/{index}")
-    public String delete(Model model, @PathVariable int index) {
-        if(index > -1 && index < driverService.getAllDrivers().size()) {
-            driverService.deleteDriverById(index);
-        }
+    @GetMapping("/delete/{id}")
+    public String delete(Model model, @PathVariable long id) {
+        driverService.deleteDriverById(id);
         return "redirect:/drivers/";
     }
 
@@ -53,11 +51,10 @@ public class DriverController {
         return "driver_edit";
     }
 
-    @GetMapping("/edit/{index}")
-    public String edit(Model model, @PathVariable int index) {
-        Driver driver = driverService.getDriverById(index);
-        if(driver != null) {
-            driver.setId(index);
+    @GetMapping("/edit/{id}")
+    public String edit(Model model, @PathVariable long id) {
+        Driver driver = driverService.getDriverById(id);
+        if (driver != null) {
             model.addAttribute("driver", driver);
             model.addAttribute("edit", true);
             return "driver_edit";
