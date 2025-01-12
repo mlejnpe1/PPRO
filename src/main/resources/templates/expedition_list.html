@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="cz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>List of All Expeditions</title>
+</head>
+<body>
+<a th:href="@{'/expeditions/create'}"> New Expedition</a>
+<ul>
+    <li th:each="expedition: ${expeditions}">
+        <a th:href="@{'/expeditions/detail/' + ${expedition.id}}">
+            <span th:text="${expedition.name}"></span>
+            <span th:text="${expedition.description}"></span>
+        </a>
+    </li>
+</ul>
+</body>
+</html>

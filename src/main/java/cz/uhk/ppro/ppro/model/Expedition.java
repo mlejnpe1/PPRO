@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotBlank;
 public class Expedition {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotBlank

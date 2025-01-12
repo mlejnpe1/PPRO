@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="cz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Detail of Expedition</title>
+</head>
+<body>
+    <a th:href="@{'/expeditions/edit/' + ${expedition.id}}">EDIT Expedition</a><br>
+    <a th:href="@{'/expeditions/delete/' + ${expedition.id}}">DELETE Expedition</a><br>
+    <b>Name:</b><span th:text="${expedition.name}"></span><br>
+    <b>Description:</b><span th:text="${expedition.description}"></span><br>
+</body>
+</html>

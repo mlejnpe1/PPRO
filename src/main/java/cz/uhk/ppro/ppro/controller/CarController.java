@@ -46,7 +46,7 @@ public class CarController {
     @GetMapping("/delete/{id}")
     public String delete(Model model, @PathVariable long id) {
         if(id > -1 && id < carService.getAllCars().size()) {
-           carService.deleteCarById(id);
+            carService.deleteCarById(id);
         }
         return "redirect:/cars/";
     }
