@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="cz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>List of All Meetings</title>
+</head>
+<body>
+<a th:href="@{'/meetings/create'}"> New Meeting</a>
+<ul>
+    <li th:each="meeting: ${meetings}">
+        <a th:href="@{'/meetings/detail/' + ${meeting.id}}">
+            <span th:text="${#meeting.date.formatISO(standardDate)}"></span>
+            <span th:text="${meeting.location}"></span>
+        </a>
+    </li>
+</ul>
+</body>
+</html>

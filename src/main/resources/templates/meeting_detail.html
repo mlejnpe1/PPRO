@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="cz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Detail of Meeting</title>
+</head>
+<body>
+<a th:href="@{'/meetings/edit/' + ${meeting.id}}">EDIT Meeting</a><br>
+<a th:href="@{'/meetings/delete/' + ${meeting.id}}">DELETE Meeting</a><br>
+<b>Location:</b><span th:text="${meeting.location}"></span><br>
+<b>Date:</b><span th:text="${meeting.date}"></span><br>
+<b>Time:</b><span th:text="${meeting.time}"></span><br>
+</body>
+</html>

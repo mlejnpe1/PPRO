@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="cz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${edit ? 'Edit Meeting' : 'New Meeting'}"></title>
+</head>
+<body>
+<form th:action="@{'/meetings/save'}" method="post" th:object="${meeting}">
+    <input type="hidden" th:field="*{id}">
+    <label>Location: </label>
+    <input type="text" th:field="*{location}">
+    <span th:if="${#fields.hasErrors('location')}" th:errors="*{location}"></span><br>
+    <label for="meeting-date">Date of meeting:</label>
+    <input type="date" th:field="${meeting.date}" id="meeting-date"/>
+    <label for="meeting-time">Time of meeting:</label>
+    <input type="time" th:field="${meeting.time}" id="meeting-time"/>
+    <br><br>
+    <input type="submit" value="Save">
+</form>
+</body>
+</html>

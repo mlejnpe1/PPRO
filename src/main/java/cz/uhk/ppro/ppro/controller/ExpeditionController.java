@@ -1,6 +1,5 @@
 package cz.uhk.ppro.ppro.controller;
 
-import cz.uhk.ppro.ppro.model.Car;
 import cz.uhk.ppro.ppro.model.Expedition;
 import cz.uhk.ppro.ppro.service.ExpeditionService;
 import jakarta.validation.Valid;
@@ -44,8 +43,10 @@ public class ExpeditionController {
     public String delete(Model model, @PathVariable long id){
         if(id > -1 && id < expeditionService.getAllExpeditions().size()){
             expeditionService.deleteExpeditionById(id);
+        }else {
+            return "redirect:/expeditions/";
         }
-        return "redirect:/expeditions/";
+        return null;
     }
 
     @GetMapping("/edit/{id}")
