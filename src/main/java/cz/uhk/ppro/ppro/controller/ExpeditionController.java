@@ -1,5 +1,6 @@
 package cz.uhk.ppro.ppro.controller;
 
+import cz.uhk.ppro.ppro.model.Car;
 import cz.uhk.ppro.ppro.model.Expedition;
 import cz.uhk.ppro.ppro.service.ExpeditionService;
 import jakarta.validation.Valid;
@@ -29,7 +30,7 @@ public class ExpeditionController {
         return "expedition_list";
     }
 
-    @GetMapping("detail/{id}")
+    @GetMapping("/detail/{id}")
     public String detail(Model model, @PathVariable long id){
         Expedition expedition = expeditionService.getExpeditionById(id);
         if(expedition != null){
@@ -43,6 +44,18 @@ public class ExpeditionController {
     public String delete(Model model, @PathVariable long id){
         if(id > -1 && id < expeditionService.getAllExpeditions().size()){
             expeditionService.deleteExpeditionById(id);
+        }
+        return "redirect:/expeditions/";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String edit(Model model, @PathVariable long id) {
+        Expedition expedition = expeditionService.getExpeditionById(id);
+        if(expedition != null) {
+            model.addAttribute("expedition", expedition);
+            model.addAttribute("edit", true);
+            model.addAttribute("expeditions", expeditionService.getAllExpeditions());
+            return "expedition_edit";
         }
         return "redirect:/expeditions/";
     }
