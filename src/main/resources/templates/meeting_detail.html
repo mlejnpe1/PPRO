@@ -3,13 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Detail of Meeting</title>
+    <title>Skaut | Detail Schůzky</title>
+    <link th:href="@{/styles/meeting/meetingDetail.css}" rel="stylesheet" />
 </head>
 <body>
-<a th:href="@{'/meetings/edit/' + ${meeting.id}}">EDIT Meeting</a><br>
-<a th:href="@{'/meetings/delete/' + ${meeting.id}}">DELETE Meeting</a><br>
-<b>Location:</b><span th:text="${meeting.location}"></span><br>
-<b>Date:</b><span th:text="${meeting.date}"></span><br>
-<b>Time:</b><span th:text="${meeting.time}"></span><br>
+<div class="wrapper">
+    <header>
+        <h1>Detail schůzky</h1>
+    </header>
+    <div class="container">
+        <h2>Informace o schůzce</h2>
+        <div class="meeting-details">
+            <p><strong>Lokace:</strong> <span th:text="${meeting.location}">Místo konání</span></p>
+            <p><strong>Datum:</strong> <span th:text="${#dates.format(meeting.date, 'dd. MM. yyyy')}">Datum schůzky</span></p>
+            <p><strong>Čas:</strong> <span th:text="${meeting.time}">Čas schůzky</span></p>
+        </div>
+        <div class="button-group">
+            <a href="#" th:href="@{'/meetings/edit/' + ${meeting.id}}" class="edit-btn">Upravit schůzku</a>
+            <a href="#" th:href="@{'/meetings/delete/' + ${meeting.id}}" class="delete-btn" onclick="return confirm('Opravdu chcete smazat tuto schůzku?');">Smazat schůzku</a>
+        </div>
+    </div>
+</div>
 </body>
 </html>

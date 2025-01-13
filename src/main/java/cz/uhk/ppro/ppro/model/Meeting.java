@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Time;
 import java.util.Date;
 
 @Entity
@@ -18,7 +17,8 @@ public class Meeting {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
-    private Time time;
+    @NotBlank
+    private String time;
 
     @NotBlank
     private String location;
@@ -26,7 +26,7 @@ public class Meeting {
     //TODO: list of participants
     //TODO: nastavit leadera
 
-    public Meeting(long id, Date date, Time time, String location) {
+    public Meeting(long id, Date date, String time, String location) {
         this.id = id;
         this.date = date;
         this.time = time;
@@ -52,11 +52,11 @@ public class Meeting {
         this.date = date;
     }
 
-    public Time getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Time time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

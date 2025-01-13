@@ -2,14 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PPRO Project</title>
+    <title>Skaut | Rozcestník</title>
+    <link th:href="@{/styles/index.css}" rel="stylesheet" />
 </head>
 <body>
-<center>
-  <h1>PPRO Project</h1>
-    <a th:href="@{'/expeditions/'}">List of Expeditions</a>
-    <br>
-    <a th:href="@{'/meetings/'}">List of Meetings</a>
-</center>
+<div class="wrapper">
+    <header>
+        <h1>Rozcestník</h1>
+    </header>
+    <div class="card-container">
+        <div class="card">
+            <h3 class="card-title">Schůzky</h3>
+            <p class="card-text">Informace o nadcházejících schůzkách.</p>
+            <a th:href="@{'/meetings/'}">Zobrazit</a>
+        </div>
+        <div class="card">
+            <h3 class="card-title">Výpravy</h3>
+            <p class="card-text">Přehled plánovaných výprav.</p>
+            <a th:href="@{'/expeditions/'}">Zobrazit</a>
+        </div>
+        <div class="card">
+            <h3 class="card-title">Uživatelé</h3>
+            <p class="card-text">Správa uživatelů a jejich profilů.</p>
+            <a th:href="@{/uzivatele}">Zobrazit</a>
+        </div>
+    </div>
+</div>
 </body>
 </html>

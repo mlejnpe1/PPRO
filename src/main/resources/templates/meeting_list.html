@@ -3,17 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>List of All Meetings</title>
+    <title>Skaut | Schůzky</title>
+    <link th:href="@{/styles/meeting/meeting.css}" rel="stylesheet" />
 </head>
 <body>
-<a th:href="@{'/meetings/create'}"> New Meeting</a>
-<ul>
-    <li th:each="meeting: ${meetings}">
-        <a th:href="@{'/meetings/detail/' + ${meeting.id}}">
-            <span th:text="${#meeting.date.formatISO(standardDate)}"></span>
-            <span th:text="${meeting.location}"></span>
-        </a>
-    </li>
-</ul>
+    <div class="wrapper">
+        <header>
+            <h1>Schůzky</h1>
+            <a th:href="@{'/meetings/create'}" class="add-button">
+                Přidat novou schůzku
+            </a>
+        </header>
+        <div class="card-container">
+            <div class="card" th:each="meeting: ${meetings}">
+                <h3 class="card-title" th:text="${#dates.format(meeting.date, 'dd. MM. yyyy')}">Datum schůzky</h3>
+                <p class="card-text" th:text="${meeting.time}">Čac začátku</p>
+                <p class="card-text" th:text="${meeting.location}">Lokace</p>
+                <a th:href="@{'/meetings/detail/' + ${meeting.id}}">Zobrazit detaily</a>
+            </div>
+    </div>
 </body>
 </html>
