@@ -3,16 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title th:text="${edit ? 'Edit Expedition' : 'New Expedition'}"></title>
+    <title th:text="${edit ? 'Skaut | Úpravení Výpravy' : 'Skaut | Nová Výprava'}"></title>
+    <link th:href="@{/styles/expedition/expeditionForm.css}" rel="stylesheet" />
 </head>
 <body>
-<form th:action="@{'/expeditions/save'}" method="post" th:object="${expedition}">
-    <input type="hidden" th:field="*{id}">
-    Name: <input type="text" th:field="*{name}">
-    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span><br>
-    Description: <input type="text" th:field="*{description}">
-    <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span><br>
-    <input type="submit" value="Save">
-</form>
+<div class="wrapper">
+    <header>
+        <h1>Vytvoření nové výpravy</h1>
+    </header>
+    <form th:action="@{'/expeditions/save'}" method="post" class="expedition-form" th:object="${expedition}">
+        <input type="hidden" th:field="*{id}">
+        <div class="form-group">
+            <label for="name">Název</label>
+            <input type="text" th:field="*{name}"  id="name" name="name" required placeholder="Zadejte název výpravy" />
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+        </div>
+        <div class="form-group">
+            <label for="description">Popis</label>
+            <input type="text" th:field="*{description}" id="description" name="description" required placeholder="Zadejte popis výpravy" />
+            <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span><br>
+        </div>
+
+        <button type="submit" class="submit-btn" value="Save">Uložit výpravu</button>
+    </form>
+</div>
 </body>
 </html>

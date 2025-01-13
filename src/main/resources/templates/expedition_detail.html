@@ -3,12 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Detail of Expedition</title>
+    <title>Skaut | Detail Výpravy</title>
+    <link th:href="@{/styles/expedition/expeditionDetail.css}" rel="stylesheet" />
 </head>
 <body>
-    <a th:href="@{'/expeditions/edit/' + ${expedition.id}}">EDIT Expedition</a><br>
-    <a th:href="@{'/expeditions/delete/' + ${expedition.id}}">DELETE Expedition</a><br>
-    <b>Name:</b><span th:text="${expedition.name}"></span><br>
-    <b>Description:</b><span th:text="${expedition.description}"></span><br>
+    <div class="wrapper">
+        <header>
+            <h1>Detail Výpravy</h1>
+        </header>
+        <div class="container">
+            <h2>Informace o výpravě</h2>
+            <div class="expedition-details">
+                <p><strong>Název:</strong> <span th:text="${expedition.name}">Název výpravy</span></p>
+                <p><strong>Popis:</strong> <span th:text="${expedition.description}">Popis výpravy</span></p>
+            </div>
+            <div class="button-group">
+                <a href="#" th:href="@{'/expeditions/edit/' + ${expedition.id}}" class="edit-btn">Upravit výpravu</a>
+                <a href="#" th:href="@{'/expeditions/delete/' + ${expedition.id}}" class="delete-btn" onclick="return confirm('Opravdu chcete smazat tuto schůzku?');">Smazat výpravu</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
