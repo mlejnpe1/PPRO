@@ -2,7 +2,9 @@ package cz.uhk.ppro.ppro.service;
 
 import java.util.List;
 import cz.uhk.ppro.ppro.model.Driver;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface DriverService {
     public List<Driver> getAllDrivers();
     public Driver getDriverById(long id);

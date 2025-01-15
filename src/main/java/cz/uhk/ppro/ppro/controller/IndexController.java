@@ -13,14 +13,12 @@ public class IndexController {
     }
 
     @GetMapping("/403")
-    @ResponseBody
     public String forbidden() {
-        return "<h1>Access Denied.</h1>";
+        return "403";
     }
 
     @GetMapping("/admin/")
-    @ResponseBody
     public String admin() {
-        return "<h1>Admin section.</h1>";
+        return "admin";
     }
 }

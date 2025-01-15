@@ -1,6 +1,5 @@
 package cz.uhk.ppro.ppro.controller;
 
-import cz.uhk.ppro.ppro.model.Expedition;
 import cz.uhk.ppro.ppro.model.Meeting;
 import cz.uhk.ppro.ppro.service.MeetingService;
 import jakarta.validation.Valid;
