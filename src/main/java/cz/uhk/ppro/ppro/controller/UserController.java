@@ -48,5 +48,6 @@ public class UserController {
         String result = userRoleService.assignRoleToUser(username, roleName);
         return "redirect:/admin/assignRole?message=" + result;
     }
+
 }
 

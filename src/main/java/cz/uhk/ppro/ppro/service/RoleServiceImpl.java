@@ -4,6 +4,7 @@ import cz.uhk.ppro.ppro.model.Role;
 import cz.uhk.ppro.ppro.repository.RoleRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,5 +23,10 @@ public class RoleServiceImpl implements RoleService{
     @Override
     public Optional<Role> findByName(String name) {
         return roleRepository.findByName(name);
+    }
+
+    @Override
+    public List<Role> findAll() {
+        return roleRepository.findAll();
     }
 }

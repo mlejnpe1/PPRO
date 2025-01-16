@@ -38,35 +38,34 @@ public class SecurityConfig {
                 .csrf().disable()
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/styles/**").permitAll()
-                        .requestMatchers("/403", "/login", "/register").permitAll()
+                        .requestMatchers("/403", "/login").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        .loginPage("/login")  // Custom login page
-                        .loginProcessingUrl("/perform_login")  // The URL that handles the login form submission
+                        .loginPage("/login")
+                        .loginProcessingUrl("/perform_login")
                         .successHandler((request, response, authentication) -> {
                             if (authentication != null && authentication.isAuthenticated()) {
-                                // Check if user has the "ADMIN" role
                                 if (authentication.getAuthorities().stream()
                                         .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"))) {
-                                    response.sendRedirect("/admin/");  // Redirect to admin page
+                                    response.sendRedirect("/admin/");
                                 } else {
-                                    response.sendRedirect("/");  // Redirect to home page
+                                    response.sendRedirect("/");
                                 }
                             } else {
-                                response.sendRedirect("/login");  // If not authenticated, stay on login page
+                                response.sendRedirect("/login");
                             }
                         })
                         .permitAll()
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login?logout")  // Redirect to login after logout
+                        .logoutSuccessUrl("/login?logout")
                         .permitAll()
                 )
                 .exceptionHandling(exceptions -> exceptions
-                        .accessDeniedPage("/access-denied")  // Custom access denied page
+                        .accessDeniedPage("/access-denied")
                 );
 
         return http.build();

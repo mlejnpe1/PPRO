@@ -1,6 +1,7 @@
 package cz.uhk.ppro.ppro.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,8 +13,14 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank
     private String username;
+
+    @NotBlank
     private String password;
+
+    private String confirmPassword;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -23,6 +30,14 @@ public class User {
     )
     private Set<Role> roles = new HashSet<>();
 
+    public User(Long id, String username, String password, String confirmPassword, Set<Role> roles) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.confirmPassword = confirmPassword;
+        this.roles = roles;
+    }
+
     public User(String username, String password, Set<Role> roles) {
         this.username = username;
         this.password = password;
@@ -30,6 +45,14 @@ public class User {
     }
 
     public User() {
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public Long getId() {
