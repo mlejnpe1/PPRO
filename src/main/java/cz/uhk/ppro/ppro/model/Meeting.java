@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "meetings")
@@ -23,14 +25,27 @@ public class Meeting {
     @NotBlank
     private String location;
 
-    //TODO: list of participants
-    //TODO: nastavit leadera
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "meeting_users",
+            joinColumns = @JoinColumn(name = "meeting_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private Set<User> users = new HashSet<>();
 
     public Meeting(long id, Date date, String time, String location) {
         this.id = id;
         this.date = date;
         this.time = time;
         this.location = location;
+    }
+
+    public Meeting(long id, Date date, String time, String location, Set<User> users) {
+        this.id = id;
+        this.date = date;
+        this.time = time;
+        this.location = location;
+        this.users = users;
     }
 
     public Meeting() {
@@ -66,5 +81,13 @@ public class Meeting {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 }

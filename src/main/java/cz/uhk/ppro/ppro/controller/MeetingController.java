@@ -1,7 +1,10 @@
 package cz.uhk.ppro.ppro.controller;
 
+import cz.uhk.ppro.ppro.model.Expedition;
 import cz.uhk.ppro.ppro.model.Meeting;
+import cz.uhk.ppro.ppro.model.User;
 import cz.uhk.ppro.ppro.service.MeetingService;
+import cz.uhk.ppro.ppro.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,15 +15,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/meetings")
 public class MeetingController {
 
     private MeetingService meetingService;
 
+    private UserService userService;
+
     @Autowired
-    public MeetingController(MeetingService meetingService) {
+    public MeetingController(MeetingService meetingService, UserService userService) {
         this.meetingService = meetingService;
+        this.userService = userService;
     }
 
     @GetMapping("/")
@@ -31,9 +43,17 @@ public class MeetingController {
 
     @GetMapping("/detail/{id}")
     public String detail(Model model, @PathVariable Long id){
-        Meeting meeting = meetingService.getMeetingsById(id);
+        Meeting meeting = meetingService.getMeetingsById(id).orElseThrow(() -> new IllegalArgumentException("Meeting not found"));
         if(meeting != null){
+            List<User> users = new ArrayList<>(meeting.getUsers());
+
+            System.out.println("Meeting ID: " + meeting.getId());
+            for (User user : meeting.getUsers()) {
+                System.out.println("User: " + user.getUsername());
+            }
+
             model.addAttribute("meeting", meeting);
+            model.addAttribute("users", users);
             return "meeting_detail";
         }
         return "meeting_detail";
@@ -49,7 +69,7 @@ public class MeetingController {
 
     @GetMapping("/edit/{id}")
     public String edit(Model model, @PathVariable long id) {
-        Meeting meeting = meetingService.getMeetingsById(id);
+        Optional<Meeting> meeting = meetingService.getMeetingsById(id);
         if(meeting != null) {
             model.addAttribute("meeting", meeting);
             model.addAttribute("edit", true);
@@ -72,7 +92,18 @@ public class MeetingController {
             model.addAttribute("edit", true);
             return "meeting_edit";
         }
+        List<User> users = userService.findAll();
+        meeting.setUsers(new HashSet<>(users));
         meetingService.saveMeeting(meeting);
         return "redirect:/meetings/";
+    }
+
+    @PostMapping("/expeditions/{id}/join")
+    public String joinExpedition(@PathVariable Long id, Principal principal) {
+        User user = userService.findByUsername(principal.getName());
+        Expedition expedition = expeditionService.getExpeditionById(id);
+        expedition.getUsers().add(user);
+        expeditionService.save(expedition); // Uložte aktualizovanou expedici
+        return "redirect:/expeditions/" + id; // Přesměrujte zpět na detail expedice
     }
 }

@@ -30,12 +30,24 @@ public class User {
     )
     private Set<Role> roles = new HashSet<>();
 
+    @ManyToMany(mappedBy = "users")
+    private Set<Meeting> meetings = new HashSet<>();
+
     public User(Long id, String username, String password, String confirmPassword, Set<Role> roles) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.confirmPassword = confirmPassword;
         this.roles = roles;
+    }
+
+    public User(Long id, String username, String password, String confirmPassword, Set<Role> roles, Set<Meeting> meetings) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.confirmPassword = confirmPassword;
+        this.roles = roles;
+        this.meetings = meetings;
     }
 
     public User(String username, String password, Set<Role> roles) {
@@ -85,5 +97,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Set<Meeting> getMeetings() {
+        return meetings;
+    }
+
+    public void setMeetings(Set<Meeting> meetings) {
+        this.meetings = meetings;
     }
 }

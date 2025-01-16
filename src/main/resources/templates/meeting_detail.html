@@ -17,6 +17,11 @@
             <p><strong>Lokace:</strong> <span th:text="${meeting.location}">Místo konání</span></p>
             <p><strong>Datum:</strong> <span th:text="${#dates.format(meeting.date, 'dd. MM. yyyy')}">Datum schůzky</span></p>
             <p><strong>Čas:</strong> <span th:text="${meeting.time}">Čas schůzky</span></p>
+            <h2>Účastníci:</h2>
+            <ul>
+                <li th:each="user : ${users}" th:text="${user.username}">Uživatel</li>
+            </ul>
+
         </div>
         <div class="button-group">
             <a href="#" th:href="@{'/meetings/edit/' + ${meeting.id}}" class="edit-btn">Upravit schůzku</a>

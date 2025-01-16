@@ -5,7 +5,6 @@ import cz.uhk.ppro.ppro.repository.UserRepository;
 import cz.uhk.ppro.ppro.security.MyUserDetails;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

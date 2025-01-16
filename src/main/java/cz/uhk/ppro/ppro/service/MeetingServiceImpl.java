@@ -23,8 +23,8 @@ public class MeetingServiceImpl implements MeetingService{
     }
 
     @Override
-    public Meeting getMeetingsById(Long id) {
-        return meetingRepository.findById(id).orElse(null);
+    public Optional<Meeting> getMeetingsById(Long id) {
+        return meetingRepository.findById(id);
     }
 
     @Override
