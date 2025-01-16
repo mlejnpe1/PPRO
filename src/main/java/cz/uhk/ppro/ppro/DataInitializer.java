@@ -34,14 +34,15 @@ public class DataInitializer implements CommandLineRunner {
 
         Set<Role> roles = new HashSet<>();
         roles.add(adminRole);
-        roles.add(userRole);
+        //roles.add(userRole);
 
-        String encodedPassword = passwordEncoder.encode("password");
+        String encodedPassword = passwordEncoder.encode("heslo");
 
-        User user = new User("username", encodedPassword, roles);
-
+        User user = new User("admin", encodedPassword, roles);
         userService.save(user);
 
+        System.out.println("Encoded password: " + encodedPassword + " Registered user is: " + user.getUsername());
         System.out.println("Initial data loaded.");
+
     }
 }
