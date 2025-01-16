@@ -1,6 +1,5 @@
 package cz.uhk.ppro.ppro.controller;
 
-import cz.uhk.ppro.ppro.model.Expedition;
 import cz.uhk.ppro.ppro.model.Meeting;
 import cz.uhk.ppro.ppro.model.User;
 import cz.uhk.ppro.ppro.service.MeetingService;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -87,8 +85,8 @@ public class MeetingController {
     }
 
     @PostMapping("/save")
-    public String save(@Valid Meeting meeting, BindingResult bindingResult, Model model){
-        if (bindingResult.hasErrors()){
+    public String save(@Valid Meeting meeting, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
             model.addAttribute("edit", true);
             return "meeting_edit";
         }
@@ -96,14 +94,5 @@ public class MeetingController {
         meeting.setUsers(new HashSet<>(users));
         meetingService.saveMeeting(meeting);
         return "redirect:/meetings/";
-    }
-
-    @PostMapping("/expeditions/{id}/join")
-    public String joinExpedition(@PathVariable Long id, Principal principal) {
-        User user = userService.findByUsername(principal.getName());
-        Expedition expedition = expeditionService.getExpeditionById(id);
-        expedition.getUsers().add(user);
-        expeditionService.save(expedition); // Uložte aktualizovanou expedici
-        return "redirect:/expeditions/" + id; // Přesměrujte zpět na detail expedice
     }
 }

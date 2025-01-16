@@ -23,7 +23,6 @@
             <input type="text" th:field="*{description}" id="description" name="description" required placeholder="Zadejte popis výpravy" />
             <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span><br>
         </div>
-
         <button type="submit" class="submit-btn" value="Save">Uložit výpravu</button>
     </form>
 </div>

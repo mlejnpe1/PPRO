@@ -6,6 +6,7 @@ import cz.uhk.ppro.ppro.service.RoleService;
 import cz.uhk.ppro.ppro.service.UserRoleService;
 import cz.uhk.ppro.ppro.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,12 +19,15 @@ public class UsersController {
 
     private final UserService userService;
 
+    private final PasswordEncoder passwordEncoder;
+
     private final RoleService roleService;
 
     @Autowired
-    public UsersController(UserService userService, RoleService roleService) {
+    public UsersController(UserService userService, RoleService roleService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.roleService = roleService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/")
@@ -51,7 +55,7 @@ public class UsersController {
             model.addAttribute("roles", roleService.findAll());
             return "users/register";
         }
-
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.save(user);
 
         return "redirect:/users/";
