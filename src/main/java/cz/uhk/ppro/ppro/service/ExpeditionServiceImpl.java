@@ -24,12 +24,12 @@ public class ExpeditionServiceImpl implements ExpeditionService{
     }
 
     @Override
-    public Expedition getExpeditionById(long id) {
+    public Expedition getExpeditionById(Long id) {
         return expeditionRepository.findById(id).orElse(null);
     }
 
     @Override
-    public void deleteExpeditionById(long id) {
+    public void deleteExpeditionById(Long id) {
         Optional<Expedition> expedition = expeditionRepository.findById(id);
         if (expedition.isPresent()){
             expeditionRepository.delete(expedition.get());

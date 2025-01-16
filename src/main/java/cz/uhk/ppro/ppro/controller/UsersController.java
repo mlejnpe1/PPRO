@@ -3,17 +3,21 @@ package cz.uhk.ppro.ppro.controller;
 import cz.uhk.ppro.ppro.model.Role;
 import cz.uhk.ppro.ppro.model.User;
 import cz.uhk.ppro.ppro.service.RoleService;
+import cz.uhk.ppro.ppro.service.UserRoleService;
 import cz.uhk.ppro.ppro.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/users")
 public class UsersController {
 
     private final UserService userService;
+
     private final RoleService roleService;
 
     @Autowired
@@ -24,8 +28,12 @@ public class UsersController {
 
     @GetMapping("/")
     public String list(Model model){
-        model.addAttribute("users", userService.findAll());
-        return "users_list";
+        List<User> users = userService.findAll();
+        if (users!=null){
+            model.addAttribute("users", userService.findAll());
+            return "users_list";
+        }
+        return "/";
     }
 
     @GetMapping("/register")
@@ -46,6 +54,12 @@ public class UsersController {
 
         userService.save(user);
 
+        return "redirect:/users/";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteUser(@PathVariable Long id){
+        userService.delete(id);
         return "redirect:/users/";
     }
 

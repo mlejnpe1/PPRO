@@ -8,7 +8,7 @@ import java.util.List;
 @Service
 public interface MeetingService {
     List<Meeting> getAllMeetings();
-    Meeting getMeetingsById(long id);
-    void deleteMeetingById(long id);
+    Meeting getMeetingsById(Long id);
+    void deleteMeetingById(Long id);
     void saveMeeting(Meeting meeting);
 }

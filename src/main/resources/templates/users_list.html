@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cz">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Skaut | Uživatelé</title>
+    <link th:href="@{/styles/users/users.css}" rel="stylesheet" />
 </head>
 <body>
-<h1>USers</h1>
+<div class="wrapper">
+    <header>
+        <h1>Uživatelé</h1>
+        <a th:href="@{'/users/register'}" class="add-button">
+            Registrovat nového uživatele
+        </a>
+    </header>
+    <div class="card-container">
+        <div class="card" th:each="user: ${users}">
+            <p class="card-text" th:text="${user.username}">Jméno</p>
+            <p class="card-text">
+                <span th:each="role : ${user.roles}" th:text="${role.name}">Role</span>
+            </p>
+            <a th:href="@{'/users/delete/' + ${user.id}}">Odstranit</a>
+        </div>
+    </div>
 </body>
 </html>

@@ -9,8 +9,8 @@ import java.util.List;
 public interface ExpeditionService {
 
     List<Expedition> getAllExpeditions();
-    Expedition getExpeditionById(long id);
-    void deleteExpeditionById(long id);
+    Expedition getExpeditionById(Long id);
+    void deleteExpeditionById(Long id);
     void saveExpedition(Expedition expedition);
 
 }

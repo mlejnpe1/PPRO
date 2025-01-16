@@ -23,12 +23,12 @@ public class MeetingServiceImpl implements MeetingService{
     }
 
     @Override
-    public Meeting getMeetingsById(long id) {
+    public Meeting getMeetingsById(Long id) {
         return meetingRepository.findById(id).orElse(null);
     }
 
     @Override
-    public void deleteMeetingById(long id) {
+    public void deleteMeetingById(Long id) {
         Optional<Meeting> meeting = meetingRepository.findById(id);
         if (meeting.isPresent()){
             meetingRepository.delete(meeting.get());

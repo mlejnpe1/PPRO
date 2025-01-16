@@ -40,17 +40,15 @@ public class ExpeditionController {
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(Model model, @PathVariable long id){
-        if(id > -1 && id < expeditionService.getAllExpeditions().size()){
+    public String delete(@PathVariable Long id){
+        if(expeditionService.getExpeditionById(id)!=null) {
             expeditionService.deleteExpeditionById(id);
-        }else {
-            return "redirect:/expeditions/";
         }
-        return null;
+        return "redirect:/expeditions/";
     }
 
     @GetMapping("/edit/{id}")
-    public String edit(Model model, @PathVariable long id) {
+    public String edit(Model model, @PathVariable Long id) {
         Expedition expedition = expeditionService.getExpeditionById(id);
         if(expedition != null) {
             model.addAttribute("expedition", expedition);

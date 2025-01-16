@@ -30,7 +30,7 @@ public class MeetingController {
     }
 
     @GetMapping("/detail/{id}")
-    public String detail(Model model, @PathVariable long id){
+    public String detail(Model model, @PathVariable Long id){
         Meeting meeting = meetingService.getMeetingsById(id);
         if(meeting != null){
             model.addAttribute("meeting", meeting);
@@ -40,13 +40,11 @@ public class MeetingController {
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(Model model, @PathVariable long id){
-        if(id > -1 && id < meetingService.getAllMeetings().size()){
+    public String delete(@PathVariable Long id){
+        if(meetingService.getMeetingsById(id)!=null){
             meetingService.deleteMeetingById(id);
-        }else {
-            return "redirect:/meetings/";
         }
-        return null;
+        return "redirect:/meetings/";
     }
 
     @GetMapping("/edit/{id}")

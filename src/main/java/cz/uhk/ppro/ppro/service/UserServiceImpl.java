@@ -3,6 +3,7 @@ package cz.uhk.ppro.ppro.service;
 import cz.uhk.ppro.ppro.model.User;
 import cz.uhk.ppro.ppro.repository.UserRepository;
 import cz.uhk.ppro.ppro.security.MyUserDetails;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
@@ -55,5 +56,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAll() {
         return userRepository.findAll();
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long id) {
+        userRepository.deleteUserById(id);
     }
 }
