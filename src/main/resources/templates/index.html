@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <title>Skaut | Rozcestník</title>
     <link th:href="@{/styles/index.css}" rel="stylesheet" />
+    <link th:href="@{/styles/fragment.css}" rel="stylesheet" />
 </head>
 <body>
+<div th:replace="fragments :: navigation"></div>
 <div class="wrapper">
     <header>
         <h1>Rozcestník</h1>

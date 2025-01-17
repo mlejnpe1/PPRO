@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div th:fragment="navigation">
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a href="/" th:href="@{/}">Logo</a>
+            <button class="navbar-toggle" onclick="toggleMenu()">&#9776;</button>
+        </div>
+        <ul class="navbar-menu" id="navbarMenu">
+            <li><a href="/schuzky" th:href="@{/meetings/}">Schůzky</a></li>
+            <li><a href="/vypravy" th:href="@{/expeditions/}">Výpravy</a></li>
+            <li><a href="/uzivatele" th:href="@{/users/}">Uživatelé</a></li>
+            <li><a href="/logout" th:href="@{/logout}">Odhlásit se</a></li>
+        </ul>
+    </nav>
+</div>
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById('navbarMenu');
+        menu.classList.toggle('active');
+    }
+</script>
+</body>
+</html>

@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title th:text="${edit ? 'Skaut | Úpravení Schůzky' : 'Skaut | Nová Schůzka'}"></title>
     <link th:href="@{/styles/meeting/meetingForm.css}" rel="stylesheet" />
+    <link th:href="@{/styles/fragment.css}" rel="stylesheet" />
 </head>
 <body>
+<div th:replace="fragments :: navigation"></div>
 <div class="wrapper">
     <header>
         <h1>Vytvoření nové schůzky</h1>
