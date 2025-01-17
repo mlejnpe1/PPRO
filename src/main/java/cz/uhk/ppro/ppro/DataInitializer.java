@@ -8,7 +8,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Component
@@ -26,23 +28,31 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Role adminRole = new Role("ROLE_ADMIN");
-        Role userRole = new Role("ROLE_USER");
+        Role adminRole = new Role("ADMIN");
+        Role userRole = new Role("USER");
 
         roleService.saveRole(adminRole);
         roleService.saveRole(userRole);
 
-        Set<Role> roles = new HashSet<>();
-        roles.add(adminRole);
-        //roles.add(userRole);
+        Set<Role> admin_role = new HashSet<>();
+        admin_role.add(adminRole);
+        Set<Role> user_role = new HashSet<>();
+        user_role.add(userRole);
+
 
         String encodedPassword = passwordEncoder.encode("heslo");
 
-        User user = new User("admin", encodedPassword, roles);
-        userService.save(user);
+        List<User> users = new ArrayList<>();
 
-        System.out.println("Encoded password: " + encodedPassword + " Registered user is: " + user.getUsername());
-        System.out.println("Initial data loaded.");
+        users.add(new User("admin", encodedPassword, admin_role));
+        users.add(new User("Jožo", encodedPassword, user_role));
+        users.add(new User("Evžen", encodedPassword, user_role));
+        users.add(new User("Ivan", encodedPassword, user_role));
+
+        for (User u:users
+             ) {
+            userService.save(u);
+        }
 
     }
 }

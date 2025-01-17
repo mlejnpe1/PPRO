@@ -39,8 +39,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/styles/**").permitAll()
                         .requestMatchers("/403", "/login").permitAll()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/expeditions/**").authenticated()
+                        .requestMatchers("/admin/**", "/users/**", "/expeditions/edit/**", "/expeditions/delete/**",
+                                "/expeditions/create", "/meetings/edit/**", "/meetings/delete/**",
+                                "/meetings/create").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
@@ -48,9 +49,12 @@ public class SecurityConfig {
                         .loginProcessingUrl("/perform_login")
                         .successHandler((request, response, authentication) -> {
                             if (authentication != null && authentication.isAuthenticated()) {
+                                authentication.getAuthorities().forEach(authority -> {
+                                });
+
                                 if (authentication.getAuthorities().stream()
                                         .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"))) {
-                                    response.sendRedirect("/admin/");
+                                    response.sendRedirect("/");
                                 } else {
                                     response.sendRedirect("/");
                                 }
@@ -65,9 +69,7 @@ public class SecurityConfig {
                         .logoutSuccessUrl("/login?logout")
                         .permitAll()
                 )
-                .exceptionHandling(exceptions -> exceptions
-                        .accessDeniedPage("/access-denied")
-                );
+                .exceptionHandling().accessDeniedPage("/access-denied");;
 
         return http.build();
     }

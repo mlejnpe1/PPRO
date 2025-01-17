@@ -34,14 +34,13 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-
-
         Set<GrantedAuthority> authorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))
                 .collect(Collectors.toSet());
 
-        return new MyUserDetails(user);
+        return new MyUserDetails(user, authorities);
     }
+
 
     @Override
     public Optional<User> findByUsername(String username) {

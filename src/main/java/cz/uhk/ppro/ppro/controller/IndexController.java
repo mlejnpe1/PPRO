@@ -12,6 +12,11 @@ public class IndexController {
         return "index";
     }
 
+    @GetMapping("/access-denied")
+    public String access() {
+        return "access-denied";
+    }
+
     @GetMapping("/403")
     public String forbidden() {
         return "403";
